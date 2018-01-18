@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Sensor Based Smart Grocery Tracking System</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="items">Items</string>
+    <string name="shoplist">Shopping List</string>
+    <string name="predlist">Prediction List</string>
+    <string name="add_item">Add Item</string>
+    <string name="view_item">View Item</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_weight">Item Weight</string>
+    <string name="item_expiry_date">Expiry Date</string>
+    <string-array name="triggerpercentage">
+        <item>50%</item>
+        <item>25%</item>
+        <item>15%</item>
+        <item>10%</item>
+        <item>5%</item>
+    </string-array>
+    <string name="item_importance">Important Item</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="shopping_list">Shopping List</string>
+    <string name="prediction_list">Prediction List</string>
+    <string name="project_title">Sensor Based Smart Grocery Tracking System</string>
+    <string name="delete">DELETE</string>
+    <string name="dummitem">Item 1</string>
+</resources>
