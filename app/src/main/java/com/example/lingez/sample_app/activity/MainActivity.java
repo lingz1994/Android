@@ -68,18 +68,6 @@ public class MainActivity extends AppCompatActivity
 
 
         String subtopic = "SBSGTS";
-        try {
-
-            Log.e("error123",client.isConnected() + "  ");
-            pahoMqttClient.subscribe(client, subtopic, 1);
-        } catch (MqttException e) {
-            Log.e("error",e.toString());
-            e.printStackTrace();
-        }
-        catch (Exception e)
-        {
-            Log.e("error",e.toString());
-        }
 
         edtxt.setText("test", TextView.BufferType.EDITABLE);
         //--------------------------//

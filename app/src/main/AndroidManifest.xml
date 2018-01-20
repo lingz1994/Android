@@ -3,8 +3,8 @@
     package="com.example.lingez.sample_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
@@ -24,9 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--<activity android:name=".activity.NewItemActivity" />-->
+        <!-- <activity android:name=".activity.NewItemActivity" /> -->
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
+
+        <activity android:name=".activity.EditItemActivity"></activity>
     </application>
 
 </manifest>
