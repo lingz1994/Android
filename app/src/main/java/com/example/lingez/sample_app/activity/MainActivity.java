@@ -61,27 +61,15 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //mqtt
-        pahoMqttClient = new PahoMqttClient();
+        /*pahoMqttClient = new PahoMqttClient();
         client = pahoMqttClient.getMqttClient(getApplicationContext(), Constants.MQTT_BROKER_URL, Constants.CLIENT_ID);
         edtxt = findViewById(R.id.subText);
 
 
 
         String subtopic = "SBSGTS";
-        try {
 
-            Log.e("error123",client.isConnected() + "  ");
-            pahoMqttClient.subscribe(client, subtopic, 1);
-        } catch (MqttException e) {
-            Log.e("error",e.toString());
-            e.printStackTrace();
-        }
-        catch (Exception e)
-        {
-            Log.e("error",e.toString());
-        }
-
-        edtxt.setText("test", TextView.BufferType.EDITABLE);
+        edtxt.setText("test", TextView.BufferType.EDITABLE);*/
         //--------------------------//
     }
 
