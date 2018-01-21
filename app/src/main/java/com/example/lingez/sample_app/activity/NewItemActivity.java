@@ -29,7 +29,7 @@ public class NewItemActivity extends AppCompatActivity {
     CheckBox item_importance;
     ArrayAdapter<CharSequence> adapter;
 
-    String url = "http://192.168.0.182:3000/items";
+    String url = "http://192.168.0.127:3000/items";
 
     private Button new_save, new_cancel;
 
