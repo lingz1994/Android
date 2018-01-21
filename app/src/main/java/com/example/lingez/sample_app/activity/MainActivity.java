@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         //mqtt
-        pahoMqttClient = new PahoMqttClient();
+        /*pahoMqttClient = new PahoMqttClient();
         client = pahoMqttClient.getMqttClient(getApplicationContext(), Constants.MQTT_BROKER_URL, Constants.CLIENT_ID);
         edtxt = findViewById(R.id.subText);
 
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
 
         String subtopic = "SBSGTS";
 
-        edtxt.setText("test", TextView.BufferType.EDITABLE);
+        edtxt.setText("test", TextView.BufferType.EDITABLE);*/
         //--------------------------//
     }
 

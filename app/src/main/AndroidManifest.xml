@@ -24,11 +24,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- <activity android:name=".activity.NewItemActivity" /> -->
+        <activity android:name=".activity.NewItemActivity" />
+        <activity android:name=".activity.EditItemActivity" />
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
 
-        <activity android:name=".activity.EditItemActivity"></activity>
     </application>
 
 </manifest>

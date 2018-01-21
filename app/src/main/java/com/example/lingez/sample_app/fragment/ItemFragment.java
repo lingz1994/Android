@@ -15,8 +15,6 @@ import com.example.lingez.sample_app.activity.NewItemActivity;
 
 public class ItemFragment extends Fragment{
 
-    TextView viewItem_weight;
-
     private Button add_NewItem;
 
     @Nullable
@@ -34,7 +32,6 @@ public class ItemFragment extends Fragment{
             }
         });
 
-        viewItem_weight = myView.findViewById(R.id.view_item_weight);
         return myView;
     }
 }
