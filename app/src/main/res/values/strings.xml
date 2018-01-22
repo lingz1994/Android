@@ -28,4 +28,6 @@
     <string name="project_title">Sensor Based Smart Grocery Tracking System</string>
     <string name="delete">DELETE</string>
     <string name="dummitem">Item 1</string>
+    <string name="new_list">New List</string>
+
 </resources>

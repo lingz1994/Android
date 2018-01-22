@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lingez.sample_app.activity.BudgetShopListActivity">
+
+    <TextView
+        android:id="@+id/mb_datepicker_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="155dp"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="263dp"
+        android:text="Date : "
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:id="@+id/mb_budget_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/mb_budget"
+        android:layout_alignBottom="@+id/mb_budget"
+        android:layout_toLeftOf="@+id/mb_datepicker"
+        android:layout_toStartOf="@+id/mb_datepicker"
+        android:text="Budget(RM) : "
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:id="@+id/mb_datepicker"
+        android:layout_width="90sp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/mb_datepicker_tv"
+        android:layout_alignBottom="@+id/mb_datepicker_tv"
+        android:layout_toEndOf="@+id/mb_datepicker_tv"
+        android:layout_toRightOf="@+id/mb_datepicker_tv"
+        android:clickable="true"
+        android:focusable="true"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/mb_budget"
+        android:layout_width="90sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mb_datepicker"
+        android:layout_toEndOf="@+id/mb_budget_tv"
+        android:layout_toRightOf="@+id/mb_budget_tv"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/mb_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/mb_budget"
+        android:layout_toStartOf="@+id/mb_budget"
+        android:text="Create" />
+
+    <Button
+        android:id="@+id/mb_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/mb_create"
+        android:layout_toEndOf="@+id/mb_create"
+        android:layout_toRightOf="@+id/mb_create"
+        android:text="@string/cancel" />
+
+</RelativeLayout>
