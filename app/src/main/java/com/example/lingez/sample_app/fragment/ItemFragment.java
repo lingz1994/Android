@@ -11,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -33,18 +31,15 @@ import java.util.List;
 
 public class ItemFragment extends Fragment{
 
-    private TextView rvItemName;
-    private TextView rvItemWeight;
-    private TextView rvItemExpDate;
-
-    private RecyclerView itrecyclerview;
-    private RecyclerAdapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-    String url = "http://192.168.1.118:3000/items";
-
-    private List<Item> listItem = new ArrayList<>();
-
     private Button add_NewItem;
+
+    RecyclerView recyclerView;
+    RecyclerView.Adapter adapter;
+    RecyclerView.LayoutManager layoutManager;
+
+    List<Item> itemList;
+
+    String url = "http://192.168.0.127:3000/items";
 
     @Nullable
     @Override
@@ -61,46 +56,53 @@ public class ItemFragment extends Fragment{
             }
         });
 
-        itrecyclerview = myView.findViewById(R.id.new_item_rv);
-        itrecyclerview.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new RecyclerAdapter((ArrayList<Item>) listItem);
-        itrecyclerview.setAdapter(adapter);
+        recyclerView = myView.findViewById(R.id.new_item_rv);
+        recyclerView.setHasFixedSize(true);
 
-        initData();
+        layoutManager = new LinearLayoutManager(getActivity());
+
+        recyclerView.setLayoutManager(layoutManager);
+
+        itemList = new ArrayList<>();
+        
+        fetchData();
 
         return myView;
     }
 
-    private void initData() {
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+    private void fetchData() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                for (int i=0; i<response.length(); i++){
+                for (int i = 0; i < response.length(); i++) {
+
+                    Item item = new Item();
+
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
-                        /*Item item = new Item(jsonObject.getString("item_name"),
-                                jsonObject.getString("item_weight"),
-                                jsonObject.getString("item_exp_date"));
-                        listItem.add(item);*/
-                        Item item = new Item();
+
                         item.setIt_name(jsonObject.getString("item_name"));
                         item.setIt_weight(jsonObject.getString("item_weight"));
                         item.setIt_expdate(jsonObject.getString("item_exp_date"));
-                        listItem.add(item);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+                    itemList.add(item);
+
                 }
-                Toast.makeText(getActivity(), response.toString(),Toast.LENGTH_SHORT).show();
+
+                adapter = new RecyclerAdapter(getActivity(), itemList);
+                recyclerView.setAdapter(adapter);
+
             }
         }, new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("JSONArray", "onErrorResponse: " + error);
+                Log.d("JSONArray", "onErrorResponse: ");
             }
         });
+
         RequestQueueSingleton.getInstance(getActivity()).addToRequestQueue(jsonArrayRequest);
     }
 }

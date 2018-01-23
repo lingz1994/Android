@@ -1,5 +1,6 @@
 package com.example.lingez.sample_app.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import com.example.lingez.sample_app.Data.Item;
 import com.example.lingez.sample_app.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lingez on 1/23/18.
@@ -17,15 +19,17 @@ import java.util.ArrayList;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
-    ArrayList<Item> arrayList = new ArrayList<>();
+    private Context context;
+    private List<Item> arrayList = new ArrayList<>();
 
-    public RecyclerAdapter(ArrayList<Item> arrayList){
+    public RecyclerAdapter(Context context,List arrayList){
+        this.context = context;
         this.arrayList = arrayList;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_rv,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_rv, parent,false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
 
         return myViewHolder;
