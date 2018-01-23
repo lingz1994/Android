@@ -80,7 +80,7 @@ public class NewItemActivity extends AppCompatActivity {
         try {
             json.put("item_name", name);
             json.put("item_weight", weight);
-            json.put("item_expdate",expdate);
+            json.put("item_exp_date",expdate);
         } catch (JSONException e){
             e.printStackTrace();
         }
