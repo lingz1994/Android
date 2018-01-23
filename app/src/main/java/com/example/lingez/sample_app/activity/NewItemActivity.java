@@ -29,7 +29,7 @@ public class NewItemActivity extends AppCompatActivity {
     CheckBox item_importance;
     ArrayAdapter<CharSequence> adapter;
 
-    String url = "http://192.168.0.127:3000/items";
+    String url = "http://192.168.1.118:3000/items";
 
     private Button new_save, new_cancel;
 
@@ -80,7 +80,7 @@ public class NewItemActivity extends AppCompatActivity {
         try {
             json.put("item_name", name);
             json.put("item_weight", weight);
-            json.put("item_expdate",expdate);
+            json.put("item_exp_date",expdate);
         } catch (JSONException e){
             e.printStackTrace();
         }
