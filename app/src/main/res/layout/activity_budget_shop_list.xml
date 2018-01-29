@@ -7,17 +7,30 @@
     tools:context="com.example.lingez.sample_app.activity.BudgetShopListActivity">
 
     <TextView
+        android:id="@+id/mb_listname_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/mb_listname"
+        android:layout_alignBottom="@+id/mb_listname"
+        android:layout_toLeftOf="@+id/mb_listname"
+        android:layout_toStartOf="@+id/mb_listname"
+        android:layout_alignStart="@+id/mb_budget_tv"
+        android:layout_alignLeft="@+id/mb_budget_tv"
+        android:text="List Name"
+        android:textColor="@android:color/black" />
+
+    <TextView
         android:id="@+id/mb_datepicker_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="155dp"
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="263dp"
-        android:text="Date : "
-        android:textColor="@android:color/black" />
+        android:layout_alignBaseline="@+id/mb_datepicker"
+        android:layout_alignBottom="@+id/mb_datepicker"
+        android:layout_toLeftOf="@+id/mb_datepicker"
+        android:layout_toStartOf="@+id/mb_datepicker"
+        android:layout_alignStart="@+id/mb_budget_tv"
+        android:layout_alignLeft="@+id/mb_budget_tv"
+        android:text="Date"
+        android:textColor="@android:color/black"/>
 
     <TextView
         android:id="@+id/mb_budget_tv"
@@ -25,52 +38,58 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/mb_budget"
         android:layout_alignBottom="@+id/mb_budget"
-        android:layout_toLeftOf="@+id/mb_datepicker"
-        android:layout_toStartOf="@+id/mb_datepicker"
-        android:text="Budget(RM) : "
-        android:textColor="@android:color/black" />
+        android:layout_toLeftOf="@+id/mb_budget"
+        android:layout_toStartOf="@+id/mb_budget"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
+        android:text="Budget(RM)"
+        android:textColor="@android:color/black"/>
+
+    <EditText
+        android:id="@+id/mb_listname"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="70dp"
+        android:layout_marginRight="70dp"
+        android:layout_marginTop="180dp"
+        android:inputType="textPersonName" />
 
     <EditText
         android:id="@+id/mb_datepicker"
-        android:layout_width="90sp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/mb_datepicker_tv"
-        android:layout_alignBottom="@+id/mb_datepicker_tv"
-        android:layout_toEndOf="@+id/mb_datepicker_tv"
-        android:layout_toRightOf="@+id/mb_datepicker_tv"
-        android:clickable="true"
-        android:focusable="true"
+        android:layout_alignLeft="@+id/mb_listname"
+        android:layout_alignStart="@+id/mb_listname"
+        android:layout_below="@+id/mb_listname"
         android:inputType="date" />
 
     <EditText
         android:id="@+id/mb_budget"
-        android:layout_width="90sp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/mb_listname"
+        android:layout_alignStart="@+id/mb_listname"
         android:layout_below="@+id/mb_datepicker"
-        android:layout_toEndOf="@+id/mb_budget_tv"
-        android:layout_toRightOf="@+id/mb_budget_tv"
         android:inputType="numberDecimal" />
 
     <Button
         android:id="@+id/mb_create"
-        android:layout_width="wrap_content"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/mb_budget"
-        android:layout_toStartOf="@+id/mb_budget"
-        android:text="Create" />
+        android:text="SAVE" />
 
     <Button
         android:id="@+id/mb_cancel"
-        android:layout_width="wrap_content"
+        android:layout_width="190dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/mb_create"
-        android:layout_toEndOf="@+id/mb_create"
-        android:layout_toRightOf="@+id/mb_create"
-        android:text="@string/cancel" />
-
+        android:text="CANCEL" />
 </RelativeLayout>

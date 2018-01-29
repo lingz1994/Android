@@ -29,6 +29,8 @@
         <activity android:name=".activity.BudgetShopListActivity" />
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />
+
+        <activity android:name=".activity.ItemShopListActivity"></activity>
     </application>
 
 </manifest>

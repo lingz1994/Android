@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lingez.sample_app.activity.ItemShopListActivity">
+
+    <TextView
+        android:id="@+id/isl_listname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="LIST NAME"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="16dp" />
+
+    <TextView
+        android:id="@+id/isl_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp"
+        android:text="DATE"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginRight="16dp" />
+
+    <EditText
+        android:id="@+id/isl_itemname_field"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:hint="Item Name"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/isl_listname"
+        android:layout_marginLeft="16dp" />
+
+    <EditText
+        android:id="@+id/isl_itemcategory_field"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Category"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/isl_itemname_field"
+        app:layout_constraintTop_toBottomOf="@+id/isl_listname"
+        android:layout_marginLeft="8dp" />
+
+    <EditText
+        android:id="@+id/isl_quantity_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Qty"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/isl_unitprice_field"
+        app:layout_constraintStart_toEndOf="@+id/isl_itemcategory_field"
+        app:layout_constraintTop_toBottomOf="@+id/isl_listname" />
+
+    <EditText
+        android:id="@+id/isl_unitprice_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        android:hint="Unit Price"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/isl_date"
+        android:layout_marginRight="16dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/isl_itemlist_rv"
+        android:layout_width="match_parent"
+        android:layout_height="353dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/isl_sortby" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="352dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/isl_itemlist_rv">
+
+        <TextView
+            android:id="@+id/isl_budget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/isl_budget_field"
+            android:layout_alignBottom="@+id/isl_budget_field"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Budget"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/isl_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/isl_total_field"
+            android:layout_alignBottom="@+id/isl_total_field"
+            android:layout_alignLeft="@+id/isl_budget"
+            android:layout_alignStart="@+id/isl_budget"
+            android:text="Total"
+            android:textColor="@android:color/black"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/isl_budget_field"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:hint="RM"
+            android:inputType="numberDecimal"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/isl_total_field"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/isl_budget_field"
+            android:hint="RM"
+            android:textSize="12sp" />
+
+    </RelativeLayout>
+
+    <Spinner
+        android:id="@+id/isl_sortby"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/isl_itemname_field"
+        android:layout_marginLeft="124dp" />
+
+</android.support.constraint.ConstraintLayout>

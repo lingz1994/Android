@@ -2,11 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/systemlist"
+        android:text="System"
+        android:textSize="20sp"
+        android:textColor="@android:color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:padding="10dp"/>
+
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/sensorlistRV"
+        android:id="@+id/shoplist_user_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/button"
+        android:layout_below="@id/systemlist"
+        android:layout_above="@+id/shoplist_new"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

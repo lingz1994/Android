@@ -2,6 +2,7 @@ package com.example.lingez.sample_app.activity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
@@ -12,8 +13,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.lingez.sample_app.Data.ShopListParent;
 import com.example.lingez.sample_app.R;
+import com.example.lingez.sample_app.RequestQueueSingleton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Calendar;
 
@@ -21,8 +32,8 @@ public class BudgetShopListActivity extends AppCompatActivity {
 
     private Button create;
     private Button cancel;
-    private EditText datepick;
-    private DatePickerDialog.OnDateSetListener mDateListener;
+    private EditText listname,datepick,budget;
+    private String shopListParentURL = "http://192.168.0.182:3000/shop_list_parents";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,7 +42,9 @@ public class BudgetShopListActivity extends AppCompatActivity {
 
         getIntent();
 
+        listname = findViewById(R.id.mb_listname);
         datepick = findViewById(R.id.mb_datepicker);
+        budget = findViewById(R.id.mb_budget);
         create = findViewById(R.id.mb_create);
         cancel = findViewById(R.id.mb_cancel);
 
@@ -43,25 +56,18 @@ public class BudgetShopListActivity extends AppCompatActivity {
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(
-                        BudgetShopListActivity.this,
-                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
-                        mDateListener,
-                        day, month, year);
-                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                dialog.show();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(BudgetShopListActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        month = month + 1;
+                        datepick.setText( dayOfMonth + "/" + month + "/" + year);
+                    }
+                }, year, month, day);
+
+                datePickerDialog.show();
             }
         });
-
-        mDateListener = new DatePickerDialog.OnDateSetListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                ++month;
-                datepick.setText( dayOfMonth + "/" + month + "/" + year);
-                Log.d("date", "onDateSet: " + dayOfMonth + "/" + month + "/" + year);
-            }
-        };
 
         create.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +85,41 @@ public class BudgetShopListActivity extends AppCompatActivity {
     }
 
     public void mbCreate(){
+
+        String name = listname.getText().toString();
+        String date = datepick.getText().toString();
+        String bdgt = budget.getText().toString();
+
+        JSONObject json = new JSONObject();
+
+        try {
+            json.put("sl_listname", name);
+            json.put("sl_date", date);
+            json.put("sl_budget", bdgt);
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, shopListParentURL, json,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Toast.makeText(getApplication(),response.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("JSONActivity", error.toString());
+            }
+        });
+        RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+
+        Intent intent = new Intent(BudgetShopListActivity.this, ItemShopListActivity.class);
+        intent.putExtra("listname", name);
+        intent.putExtra("listdate", date);
+        intent.putExtra("listbudget", bdgt);
+        startActivity(intent);
         finish();
     }
 

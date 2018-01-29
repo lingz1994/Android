@@ -20,7 +20,7 @@ import com.example.lingez.sample_app.Data.Item;
 import com.example.lingez.sample_app.R;
 import com.example.lingez.sample_app.RequestQueueSingleton;
 import com.example.lingez.sample_app.activity.NewItemActivity;
-import com.example.lingez.sample_app.adapter.RecyclerAdapter;
+import com.example.lingez.sample_app.adapter.ViewItemRecyclerAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,7 +39,7 @@ public class ItemFragment extends Fragment{
 
     List<Item> itemList;
 
-    String url = "http://192.168.0.127:3000/items";
+    String url = "http://192.168.0.182:3000/items";
 
     @Nullable
     @Override
@@ -92,7 +92,7 @@ public class ItemFragment extends Fragment{
 
                 }
 
-                adapter = new RecyclerAdapter(getActivity(), itemList);
+                adapter = new ViewItemRecyclerAdapter(getActivity(), itemList);
                 recyclerView.setAdapter(adapter);
 
             }

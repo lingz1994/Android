@@ -1,137 +1,208 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context="com.example.lingez.sample_app.activity.NewItemActivity">
 
-    <Button
-        android:id="@+id/new_item_save"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        app:layout_constraintBottom_toTopOf="@+id/new_item_cancel"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/new_item_cancel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/new_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/new_item_trig"
+            android:layout_alignLeft="@+id/new_item_trig"
+            android:layout_below="@+id/new_item_category"
+            android:layout_marginTop="12dp"
+            android:text="Item Name"
+            android:textColor="@android:color/black" />
 
-    <TextView
-        android:id="@+id/new_item_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="200dp"
-        android:text="Item Name"
-        android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/new_item_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/new_item_weight_field"
+            android:layout_alignBottom="@+id/new_item_weight_field"
+            android:layout_alignStart="@+id/new_item_trig"
+            android:layout_alignLeft="@+id/new_item_trig"
+            android:text="Weight"
+            android:textColor="@android:color/black" />
 
-    <TextView
-        android:id="@+id/new_item_weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="32dp"
-        android:text="Weight"
-        android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_item_name" />
+        <TextView
+            android:id="@+id/new_item_expdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/new_item_expdate_field"
+            android:layout_alignBottom="@+id/new_item_expdate_field"
+            android:layout_alignStart="@+id/new_item_trig"
+            android:layout_alignLeft="@+id/new_item_trig"
+            android:text="Expiry Date"
+            android:textColor="@android:color/black"/>
 
-    <TextView
-        android:id="@+id/new_item_expdate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="32dp"
-        android:text="Expiry Date"
-        android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_item_weight" />
+        <TextView
+            android:id="@+id/new_item_trig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/newtrigspinner"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="54dp"
+            android:layout_marginStart="54dp"
+            android:text="Trigger Level"
+            android:textColor="@android:color/black" />
 
-    <TextView
-        android:id="@+id/new_item_trig"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="32dp"
-        android:text="Trigger Level"
-        android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_item_expdate" />
+        <TextView
+            android:id="@+id/new_item_importance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/new_item_importance_checkBox"
+            android:layout_alignStart="@+id/new_item_trig"
+            android:layout_alignLeft="@+id/new_item_trig"
+            android:layout_above="@id/new_item_save"
+            android:text="Important"
+            android:textColor="@android:color/black" />
 
-    <TextView
-        android:id="@+id/new_item_importance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="32dp"
-        android:text="Important"
-        android:textColor="@android:color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_item_trig" />
+        <AutoCompleteTextView
+            android:id="@+id/new_item_name_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/new_item_category_field"
+            android:layout_alignStart="@+id/new_item_category_field"
+            android:layout_below="@+id/new_item_category_field"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textAppearance="@android:style/TextAppearance.Material.Small" />
 
-    <EditText
-        android:id="@+id/new_item_name_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="192dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textAppearance="@android:style/TextAppearance.Material.Small"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/new_item_weight_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/new_item_quantity_field"
+            android:layout_alignStart="@+id/new_item_quantity_field"
+            android:layout_below="@+id/new_item_quantity_field"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:textSize="14sp" />
 
-    <EditText
-        android:id="@+id/new_item_weight_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_item_name_field" />
+        <EditText
+            android:id="@+id/new_item_expdate_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/new_item_weight_field"
+            android:layout_alignStart="@+id/new_item_weight_field"
+            android:layout_below="@+id/new_item_weight_field"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
 
-    <EditText
-        android:id="@+id/new_item_expdate_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textAppearance="@android:style/TextAppearance.Material.Small"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_item_weight_field" />
+        <Spinner
+            android:id="@+id/newtrigspinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/new_item_expdate_field"
+            android:layout_alignStart="@+id/new_item_expdate_field"
+            android:layout_below="@+id/new_item_expdate_field"/>
 
-    <Spinner
-        android:id="@+id/newtrigspinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/new_item_expdate_field" />
+        <CheckBox
+            android:id="@+id/new_item_importance_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/newtrigspinner"
+            android:layout_alignStart="@+id/newtrigspinner"
+            android:layout_below="@+id/newtrigspinner" />
 
-    <CheckBox
-        android:id="@+id/new_item_importance_checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="180dp"
-        android:layout_marginTop="23dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newtrigspinner" />
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/new_item_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/new_item_trig"
+            android:layout_alignLeft="@+id/new_item_trig"
+            android:layout_marginTop="178dp"
+            android:text="Category"
+            android:textColor="@android:color/black" />
+
+        <AutoCompleteTextView
+            android:id="@+id/new_item_category_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/new_item_name"
+            android:layout_toEndOf="@+id/new_item_save"
+            android:layout_toRightOf="@+id/new_item_save"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:selectAllOnFocus="false"
+            android:singleLine="true"
+            android:textAppearance="@android:style/TextAppearance.Material.Small"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/new_item_unitprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/new_item_unitprice_field"
+            android:layout_alignBottom="@+id/new_item_unitprice_field"
+            android:layout_alignStart="@+id/new_item_trig"
+            android:layout_alignLeft="@+id/new_item_trig"
+            android:text="Unit Price"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/new_item_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/new_item_quantity_field"
+            android:layout_alignBottom="@+id/new_item_quantity_field"
+            android:layout_alignStart="@+id/new_item_trig"
+            android:layout_alignLeft="@+id/new_item_trig"
+            android:text="Quantity"
+            android:textColor="@android:color/black" />
+
+        <EditText
+            android:id="@+id/new_item_unitprice_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/new_item_name_field"
+            android:layout_alignStart="@+id/new_item_name_field"
+            android:layout_below="@+id/new_item_name_field"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:textSize="14sp"/>
+
+        <EditText
+            android:id="@+id/new_item_quantity_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/new_item_unitprice_field"
+            android:layout_alignStart="@+id/new_item_unitprice_field"
+            android:layout_below="@+id/new_item_unitprice_field"
+            android:ems="10"
+            android:inputType="number"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/new_item_save"
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="@string/save" />
+
+        <Button
+            android:id="@+id/new_item_cancel"
+            android:layout_width="192dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="@string/cancel"/>
+
+    </RelativeLayout>
+
+</ScrollView>
