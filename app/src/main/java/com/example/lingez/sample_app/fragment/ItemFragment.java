@@ -39,7 +39,7 @@ public class ItemFragment extends Fragment{
 
     List<Item> itemList;
 
-    String url = "http://192.168.0.182:3000/items";
+    String url = "http://192.168.1.118:3000/items";
 
     @Nullable
     @Override

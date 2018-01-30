@@ -3,6 +3,7 @@ package com.example.lingez.sample_app.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,10 +38,18 @@ public class ShopListHomeRecyclerAdapter extends RecyclerView.Adapter<ShopListHo
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.listName.setText(arrayList.get(position).getListName());
         holder.listDate.setText(arrayList.get(position).getDate());
-        holder.shopListParent = arrayList.get(position);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ItemShopListActivity.class);
+                intent.putExtra("parentID", arrayList.get(position).getParentID());
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -53,22 +62,10 @@ public class ShopListHomeRecyclerAdapter extends RecyclerView.Adapter<ShopListHo
         TextView listName;
         TextView listDate;
 
-        ShopListParent shopListParent;
-
         public MyViewHolder(View itemView) {
             super(itemView);
             listName = itemView.findViewById(R.id.shoplist_name);
             listDate = itemView.findViewById(R.id.shoplist_date);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), ItemShopListActivity.class);
-                    intent.putExtra("listname", listName.getText().toString());
-                    intent.putExtra("listdate", listDate.getText().toString());
-                    v.getContext().startActivity(intent);
-                }
-            });
         }
     }
 }

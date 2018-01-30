@@ -23,11 +23,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="6dp"
+            android:singleLine="true"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/checkBoxItem"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="8dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/itemCategory"
@@ -35,11 +35,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="6dp"
+            android:singleLine="true"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/itemName"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="8dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/itemQuantity"
@@ -47,11 +47,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="6dp"
+            android:singleLine="true"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/itemCategory"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="8dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/itemUnitPrice"
@@ -59,12 +59,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="6dp"
+            android:singleLine="true"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/itemCategory"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="8dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

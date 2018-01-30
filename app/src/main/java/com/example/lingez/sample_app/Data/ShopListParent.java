@@ -5,9 +5,10 @@ package com.example.lingez.sample_app.Data;
  */
 
 public class ShopListParent {
+    private String parentID;
     private String listName;
     private String date;
-    private int budget;
+    private String budget;
 
     public String getListName() {
         return listName;
@@ -25,17 +26,26 @@ public class ShopListParent {
         this.date = date;
     }
 
-    public int getBudget() {
+    public String getBudget() {
         return budget;
     }
 
-    public void setBudget(int budget) {
+    public void setBudget(String budget) {
         this.budget = budget;
     }
 
-    public ShopListParent(String listName, String date, int budget) {
+    public String getParentID() {
+        return parentID;
+    }
+
+    public void setParentID(String parentID) {
+        this.parentID = parentID;
+    }
+
+    public ShopListParent(String listName, String date, String parentID, String budget) {
         this.listName = listName;
         this.date = date;
+        this.parentID = parentID;
         this.budget = budget;
     }
 

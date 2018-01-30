@@ -89,6 +89,8 @@ public class ShopListFragment extends Fragment{
 
                         shopListParent.setListName(jsonObject.getString("sl_listname"));
                         shopListParent.setDate(jsonObject.getString("sl_date"));
+                        shopListParent.setBudget(jsonObject.getString("sl_budget"));
+                        shopListParent.setParentID(jsonObject.getString("_id"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

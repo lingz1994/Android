@@ -116,10 +116,10 @@ public class BudgetShopListActivity extends AppCompatActivity {
         RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
 
         Intent intent = new Intent(BudgetShopListActivity.this, ItemShopListActivity.class);
-        intent.putExtra("listname", name);
+        /*intent.putExtra("listname", name);
         intent.putExtra("listdate", date);
-        intent.putExtra("listbudget", bdgt);
-        startActivity(intent);
+        intent.putExtra("listbudget", bdgt);*/
+//        startActivity(intent);
         finish();
     }
 
