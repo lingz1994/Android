@@ -11,8 +11,8 @@
             android:id="@+id/nav_shoplist"
             android:title="@string/shopping_list" />
         <item
-            android:id="@+id/nav_predlist"
-            android:title="@string/prediction_list" />
+            android:id="@+id/nav_statistics"
+            android:title="Statistics" />
     </group>
 
 </menu>

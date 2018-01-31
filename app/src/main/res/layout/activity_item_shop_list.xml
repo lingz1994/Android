@@ -38,11 +38,12 @@
         android:layout_marginTop="8dp"
         android:hint="Item Name"
         android:inputType="text"
-        android:selectAllOnFocus="false"
         android:singleLine="true"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/isl_listname" />
+        app:layout_constraintTop_toBottomOf="@+id/isl_listname"
+        android:layout_marginLeft="16dp"
+        android:imeOptions="actionNext"/>
 
     <EditText
         android:id="@+id/isl_itemcategory_field"
@@ -57,7 +58,9 @@
         android:singleLine="true"
         android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/isl_itemname_field"
-        app:layout_constraintTop_toBottomOf="@+id/isl_listname" />
+        app:layout_constraintTop_toBottomOf="@+id/isl_listname"
+        android:layout_marginLeft="8dp"
+        android:imeOptions="actionNext"/>
 
     <EditText
         android:id="@+id/isl_quantity_field"
@@ -72,7 +75,8 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/isl_unitprice_field"
         app:layout_constraintStart_toEndOf="@+id/isl_itemcategory_field"
-        app:layout_constraintTop_toBottomOf="@+id/isl_listname" />
+        app:layout_constraintTop_toBottomOf="@+id/isl_listname"
+        android:imeOptions="actionNext"/>
 
     <EditText
         android:id="@+id/isl_unitprice_field"
@@ -85,7 +89,9 @@
         android:singleLine="true"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/isl_date" />
+        app:layout_constraintTop_toBottomOf="@+id/isl_date"
+        android:layout_marginRight="16dp"
+        android:imeOptions="actionDone"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/isl_itemlist_rv"

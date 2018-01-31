@@ -2,9 +2,12 @@ package com.example.lingez.sample_app.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.lingez.sample_app.Data.ShopList;
@@ -35,11 +38,25 @@ public class ShopListRecyclerAdapter extends RecyclerView.Adapter<ShopListRecycl
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.itemName.setText(arrayList.get(position).getItemName());
         holder.itemCategory.setText(arrayList.get(position).getItemCategory());
         holder.itemQuantity.setText(arrayList.get(position).getItemQuantity());
-        holder.unitPrice.setText(arrayList.get(position).getItemUnitPrice());
+        holder.unitPrice.setText(arrayList.get(position).getItemTotalPrice());
+
+        holder.checkitem.setOnCheckedChangeListener(null);
+        holder.checkitem.setChecked(arrayList.get(position).getItemCheck());
+        holder.checkitem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (holder.checkitem.isChecked()){
+                    Log.d("Check", "onCheckedChanged: " + holder.getAdapterPosition() + " " + holder.checkitem.isChecked() + " " + holder.itemName.getText());
+                }
+                else {
+                    Log.d("Check", "onCheckedChanged: " + holder.getAdapterPosition() + " " + holder.checkitem.isChecked() + " " + holder.itemName.getText());
+                }
+            }
+        });
     }
 
     @Override
@@ -53,6 +70,7 @@ public class ShopListRecyclerAdapter extends RecyclerView.Adapter<ShopListRecycl
         TextView itemCategory;
         TextView itemQuantity;
         TextView unitPrice;
+        CheckBox checkitem;
 
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -60,6 +78,7 @@ public class ShopListRecyclerAdapter extends RecyclerView.Adapter<ShopListRecycl
             itemCategory = itemView.findViewById(R.id.itemCategory);
             itemQuantity = itemView.findViewById(R.id.itemQuantity);
             unitPrice = itemView.findViewById(R.id.itemUnitPrice);
+            checkitem = itemView.findViewById(R.id.checkBoxItem);
         }
     }
 }

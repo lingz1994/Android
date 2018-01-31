@@ -5,18 +5,21 @@ package com.example.lingez.sample_app.Data;
  */
 
 public class ShopList {
-    private Boolean itemCheck;
+    private boolean itemCheck;
     private String itemName;
     private String itemCategory;
     private String itemQuantity;
-    private String itemUnitPrice;
+    private String itemTotalPrice;
 
-    public ShopList(Boolean itemCheck, String itemName, String itemCategory, String itemQuantity, String itemUnitPrice) {
+    public ShopList(Boolean itemCheck, String itemName, String itemCategory, String itemQuantity, String itemTotalPrice) {
         this.itemCheck = itemCheck;
         this.itemName = itemName;
         this.itemCategory = itemCategory;
         this.itemQuantity = itemQuantity;
-        this.itemUnitPrice = itemUnitPrice;
+        this.itemTotalPrice = itemTotalPrice;
+    }
+
+    public ShopList() {
     }
 
     public String getItemName() {
@@ -43,19 +46,19 @@ public class ShopList {
         this.itemQuantity = itemQuantity;
     }
 
-    public String getItemUnitPrice() {
-        return itemUnitPrice;
+    public String getItemTotalPrice() {
+        return itemTotalPrice;
     }
 
-    public void setItemUnitPrice(String itemUnitPrice) {
-        this.itemUnitPrice = itemUnitPrice;
+    public void setItemTotalPrice(String itemTotalPrice) {
+        this.itemTotalPrice = itemTotalPrice;
     }
 
     public Boolean getItemCheck() {
         return itemCheck;
     }
 
-    public void setItemCheck(Boolean itemCheck) {
+    public void setItemCheck(boolean itemCheck) {
         this.itemCheck = itemCheck;
     }
 }

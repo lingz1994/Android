@@ -4,31 +4,23 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.lingez.sample_app.R;
 import com.example.lingez.sample_app.fragment.ItemFragment;
-import com.example.lingez.sample_app.fragment.PredListFragment;
 import com.example.lingez.sample_app.fragment.ShopListFragment;
-import com.example.lingez.sample_app.mqtt.Constants;
+import com.example.lingez.sample_app.fragment.StatisticsFragment;
 import com.example.lingez.sample_app.mqtt.PahoMqttClient;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
-import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MainActivity extends AppCompatActivity
@@ -118,8 +110,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_shoplist) {
             fragmentManager.beginTransaction().replace(R.id.content_frame, new ShopListFragment()).commit();
 
-        } else if (id == R.id.nav_predlist) {
-            fragmentManager.beginTransaction().replace(R.id.content_frame, new PredListFragment()).commit();
+        } else if (id == R.id.nav_statistics) {
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new StatisticsFragment()).commit();
 
         }
 
