@@ -2,6 +2,7 @@ package com.example.lingez.sample_app.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,15 @@ import android.widget.TextView;
 
 import com.example.lingez.sample_app.Data.Item;
 import com.example.lingez.sample_app.R;
+
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +31,10 @@ public class ViewItemRecyclerAdapter extends RecyclerView.Adapter<ViewItemRecycl
 
     private Context context;
     private List<Item> arrayList = new ArrayList<>();
+
+    MqttAndroidClient client;
+    String topic = "SBSGTS";
+    String mqttServer = "tcp://iot.eclipse.org:1883";
 
     public ViewItemRecyclerAdapter(Context context,List arrayList){
         this.context = context;
@@ -38,8 +52,10 @@ public class ViewItemRecyclerAdapter extends RecyclerView.Adapter<ViewItemRecycl
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.itemName.setText(arrayList.get(position).getIt_name());
-        holder.itemWeight.setText(arrayList.get(position).getIt_weight());
+//        holder.itemWeight.setText(arrayList.get(position).getIt_weight());
         holder.itemExpdate.setText(arrayList.get(position).getIt_expdate());
+
+        mqttSensor(holder);
 
     }
 
@@ -60,5 +76,59 @@ public class ViewItemRecyclerAdapter extends RecyclerView.Adapter<ViewItemRecycl
             itemWeight = itemView.findViewById(R.id.rv_view_item_weight);
             itemExpdate = itemView.findViewById(R.id.rv_view_item_expdate);
         }
+    }
+
+    //MQTT
+    private void setSub(){
+        try{
+            client.subscribe(topic, 1);
+        } catch (MqttException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void mqttSensor(final MyViewHolder myViewHolder){
+        String clientId = MqttClient.generateClientId();
+        client =
+                new MqttAndroidClient(myViewHolder.itemView.getContext(), mqttServer,
+                        clientId);
+
+        try {
+            IMqttToken token = client.connect();
+            token.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    // We are connected
+                    Log.d("MQTT", "onSuccess");
+                    setSub();
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    // Something went wrong e.g. connection timeout or firewall problems
+                    Log.d("MQTT", "onFailure");
+
+                }
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void connectionLost(Throwable cause) {
+
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                myViewHolder.itemWeight.setText(new String(message.getPayload()));
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+
+            }
+        });
     }
 }

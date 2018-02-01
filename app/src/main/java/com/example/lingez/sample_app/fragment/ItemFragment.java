@@ -22,6 +22,14 @@ import com.example.lingez.sample_app.RequestQueueSingleton;
 import com.example.lingez.sample_app.activity.NewItemActivity;
 import com.example.lingez.sample_app.adapter.ViewItemRecyclerAdapter;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +60,7 @@ public class ItemFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), NewItemActivity.class);
+
                 startActivity(intent);
             }
         });
@@ -64,7 +73,7 @@ public class ItemFragment extends Fragment{
         recyclerView.setLayoutManager(layoutManager);
 
         itemList = new ArrayList<>();
-        
+
         fetchData();
 
         return myView;

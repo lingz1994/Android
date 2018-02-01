@@ -20,6 +20,14 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.lingez.sample_app.R;
 import com.example.lingez.sample_app.RequestQueueSingleton;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +46,10 @@ public class NewItemActivity extends AppCompatActivity {
 
     String item = "http://192.168.0.182:3000/items";
     String itemcategory = "http://192.168.0.182:3000/itemcategories";
+
+    MqttAndroidClient client;
+    String topic = "SBSGTS";
+    String mqttServer = "tcp://iot.eclipse.org:1883";
 
     private Button new_save, new_cancel;
 
@@ -78,8 +90,65 @@ public class NewItemActivity extends AppCompatActivity {
             }
         });
 
+
+
+
+        String clientId = MqttClient.generateClientId();
+        client =
+                new MqttAndroidClient(this.getApplicationContext(), mqttServer,
+                        clientId);
+
+        try {
+            IMqttToken token = client.connect();
+            token.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    // We are connected
+                    Log.d("MQTT", "onSuccess");
+                    setSub();
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    // Something went wrong e.g. connection timeout or firewall problems
+                    Log.d("MQTT", "onFailure");
+
+                }
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void connectionLost(Throwable cause) {
+
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                item_weight.setText(new String(message.getPayload()));
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+
+            }
+        });
+
+
+
+
         newItemCategory();
         newItemName();
+    }
+
+    private void setSub(){
+        try{
+            client.subscribe(topic, 1);
+        } catch (MqttException e){
+            e.printStackTrace();
+        }
     }
 
     public void newItemSave(){
