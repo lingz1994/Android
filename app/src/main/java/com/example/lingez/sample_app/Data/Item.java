@@ -5,6 +5,7 @@ package com.example.lingez.sample_app.Data;
  */
 
 public class Item {
+    private String it_id;
     private String it_name;
     private String it_weight;
     private String it_expdate;
@@ -17,6 +18,14 @@ public class Item {
         this.it_name = item;
         this.it_weight = weight;
         this.it_expdate = expdate;
+    }
+
+    public String getIt_id() {
+        return it_id;
+    }
+
+    public void setIt_id(String it_id) {
+        this.it_id = it_id;
     }
 
     public String getIt_name() {

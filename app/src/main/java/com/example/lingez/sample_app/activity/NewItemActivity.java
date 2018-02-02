@@ -1,5 +1,6 @@
 package com.example.lingez.sample_app.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,7 +11,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -58,7 +58,8 @@ public class NewItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_item);
 
-        getIntent();
+        Intent intent = getIntent();
+        final String itemID = intent.getStringExtra("ItemID");
 
         item_category = findViewById(R.id.new_item_category_field);
         item_name = findViewById(R.id.new_item_name_field);
@@ -74,13 +75,27 @@ public class NewItemActivity extends AppCompatActivity {
 
         item_importance = findViewById(R.id.new_item_importance_checkBox);
 
+
         new_save = findViewById(R.id.new_item_save);
-        new_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                newItemSave();
-            }
-        });
+
+        if (itemID != null){
+            getItemData(itemID);
+
+            new_save.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    editItemSave(itemID);
+                }
+            });
+
+        } else {
+            new_save.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    newItemSave();
+                }
+            });
+        }
 
         new_cancel = findViewById(R.id.new_item_cancel);
         new_cancel.setOnClickListener(new View.OnClickListener() {
@@ -143,12 +158,87 @@ public class NewItemActivity extends AppCompatActivity {
         newItemName();
     }
 
+    private void editItemSave(String itemID) {
+        String splititemID[] = itemID.split("\"");
+        item = item.concat("/"+splititemID[3]);
+        JSONObject json = new JSONObject();
+
+        String category = item_category.getText().toString();
+        String name = item_name.getText().toString();
+        String unitprice = item_unitprice.getText().toString();
+        String quantity = item_quantity.getText().toString();
+        String weight = item_weight.getText().toString();
+        String expdate = item_expdate.getText().toString();
+
+        try {
+            json.put("item_category", category);
+            json.put("item_name", name);
+            json.put("item_unitprice", unitprice);
+            json.put("item_quantity", quantity);
+            json.put("item_weight", weight);
+            json.put("item_exp_date",expdate);
+        } catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT, item, json,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("JSONActivity", error.toString());
+            }
+        });
+        RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
+
+        finish();
+    }
+
     private void setSub(){
         try{
             client.subscribe(topic, 1);
         } catch (MqttException e){
             e.printStackTrace();
         }
+    }
+
+    public void getItemData(final String itemID){
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, item, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < response.length(); i++) {
+
+                    try {
+                        JSONObject jsonObject = response.getJSONObject(i);
+
+                        if (itemID.equals(jsonObject.getString("_id"))) {
+
+                            item_category.setText(jsonObject.getString("item_category"));
+                            item_name.setText(jsonObject.getString("item_name"));
+                            item_unitprice.setText(jsonObject.getString("item_unitprice"));
+                            item_quantity.setText(jsonObject.getString("item_quantity"));
+                            item_weight.setText(jsonObject.getString("item_weight"));
+                            item_expdate.setText(jsonObject.getString("item_exp_date"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+            }
+        }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("JSONArray", "onErrorResponse: ");
+            }
+        });
+
+        RequestQueueSingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonArrayRequest);
     }
 
     public void newItemSave(){
@@ -177,7 +267,6 @@ public class NewItemActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Toast.makeText(getApplication(),response.toString(),Toast.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
 

@@ -22,14 +22,6 @@ import com.example.lingez.sample_app.RequestQueueSingleton;
 import com.example.lingez.sample_app.activity.NewItemActivity;
 import com.example.lingez.sample_app.adapter.ViewItemRecyclerAdapter;
 
-import org.eclipse.paho.android.service.MqttAndroidClient;
-import org.eclipse.paho.client.mqttv3.IMqttActionListener;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -93,6 +85,7 @@ public class ItemFragment extends Fragment{
                         item.setIt_name(jsonObject.getString("item_name"));
                         item.setIt_weight(jsonObject.getString("item_weight"));
                         item.setIt_expdate(jsonObject.getString("item_exp_date"));
+                        item.setIt_id(jsonObject.getString("_id"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

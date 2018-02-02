@@ -25,7 +25,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.NewItemActivity" />
-        <activity android:name=".activity.EditItemActivity" />
         <activity android:name=".activity.BudgetShopListActivity" />
 
         <service android:name="org.eclipse.paho.android.service.MqttService" />

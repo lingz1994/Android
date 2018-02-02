@@ -1,6 +1,7 @@
 package com.example.lingez.sample_app.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,8 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.lingez.sample_app.Data.Item;
 import com.example.lingez.sample_app.R;
+import com.example.lingez.sample_app.RequestQueueSingleton;
+import com.example.lingez.sample_app.activity.NewItemActivity;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -19,6 +26,7 @@ import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +39,7 @@ public class ViewItemRecyclerAdapter extends RecyclerView.Adapter<ViewItemRecycl
 
     private Context context;
     private List<Item> arrayList = new ArrayList<>();
+    String item = "http://192.168.0.182:3000/items";
 
     MqttAndroidClient client;
     String topic = "SBSGTS";
@@ -50,12 +59,28 @@ public class ViewItemRecyclerAdapter extends RecyclerView.Adapter<ViewItemRecycl
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.itemName.setText(arrayList.get(position).getIt_name());
 //        holder.itemWeight.setText(arrayList.get(position).getIt_weight());
         holder.itemExpdate.setText(arrayList.get(position).getIt_expdate());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), NewItemActivity.class);
+                intent.putExtra("ItemID", arrayList.get(position).getIt_id());
+                v.getContext().startActivity(intent);
+            }
+        });
 
-        mqttSensor(holder);
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                deleteItemData(arrayList.get(position).getIt_id(),holder);
+                return true;
+            }
+        });
+
+        mqttSensor(holder, arrayList.size());
 
     }
 
@@ -79,15 +104,18 @@ public class ViewItemRecyclerAdapter extends RecyclerView.Adapter<ViewItemRecycl
     }
 
     //MQTT
-    private void setSub(){
-        try{
-            client.subscribe(topic, 1);
-        } catch (MqttException e){
-            e.printStackTrace();
+    private void setSub(int size){
+
+        for (int i=1; i<=size; i++){
+            try{
+                client.subscribe(topic+i, 1);
+            } catch (MqttException e){
+                e.printStackTrace();
+            }
         }
     }
 
-    private void mqttSensor(final MyViewHolder myViewHolder){
+    private void mqttSensor(final MyViewHolder myViewHolder, final int size){
         String clientId = MqttClient.generateClientId();
         client =
                 new MqttAndroidClient(myViewHolder.itemView.getContext(), mqttServer,
@@ -100,7 +128,7 @@ public class ViewItemRecyclerAdapter extends RecyclerView.Adapter<ViewItemRecycl
                 public void onSuccess(IMqttToken asyncActionToken) {
                     // We are connected
                     Log.d("MQTT", "onSuccess");
-                    setSub();
+                    setSub(size);
                 }
 
                 @Override
@@ -122,6 +150,7 @@ public class ViewItemRecyclerAdapter extends RecyclerView.Adapter<ViewItemRecycl
 
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
+                Log.d("mqtt123", "messageArrived: "+topic + " " + new String(message.getPayload()));
                 myViewHolder.itemWeight.setText(new String(message.getPayload()));
             }
 
@@ -130,5 +159,25 @@ public class ViewItemRecyclerAdapter extends RecyclerView.Adapter<ViewItemRecycl
 
             }
         });
+    }
+
+    public void deleteItemData(String itemID, MyViewHolder holder){
+        String splititemID[] = itemID.split("\"");
+        item = item.concat("/"+splititemID[3]);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.DELETE, item, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("JSONActivity", error.toString());
+            }
+        });
+        RequestQueueSingleton.getInstance(holder.itemView.getContext()).addToRequestQueue(jsonObjectRequest);
+
     }
 }
