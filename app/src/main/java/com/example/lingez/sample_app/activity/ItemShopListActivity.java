@@ -98,6 +98,7 @@ public class ItemShopListActivity extends AppCompatActivity {
                             listname.setText(jsonObject.getString("sl_listname"));
                             date.setText(jsonObject.getString("sl_date"));
                             budget.setText(jsonObject.getString("sl_budget"));
+
                         }
                     }catch (JSONException e) {
                         e.printStackTrace();

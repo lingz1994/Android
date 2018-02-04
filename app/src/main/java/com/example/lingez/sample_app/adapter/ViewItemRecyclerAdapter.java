@@ -1,6 +1,8 @@
 package com.example.lingez.sample_app.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -52,7 +54,7 @@ public class ViewItemRecyclerAdapter extends RecyclerView.Adapter<ViewItemRecycl
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_rv, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.items_layout, parent,false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
 
         return myViewHolder;
@@ -75,12 +77,28 @@ public class ViewItemRecyclerAdapter extends RecyclerView.Adapter<ViewItemRecycl
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                deleteItemData(arrayList.get(position).getIt_id(),holder);
+                AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
+                builder.setMessage("Do you want to delete this item?")
+                        .setCancelable(false)
+                        .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                deleteItemData(arrayList.get(position).getIt_id(),holder);
+                            }
+                        })
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
                 return true;
             }
         });
 
-        mqttSensor(holder, arrayList.size());
+        mqttSensor(holder, position);
 
     }
 
@@ -97,9 +115,9 @@ public class ViewItemRecyclerAdapter extends RecyclerView.Adapter<ViewItemRecycl
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            itemName = itemView.findViewById(R.id.rv_view_item_name);
-            itemWeight = itemView.findViewById(R.id.rv_view_item_weight);
-            itemExpdate = itemView.findViewById(R.id.rv_view_item_expdate);
+//            itemName = itemView.findViewById(R.id.rv_view_item_name);
+//            itemWeight = itemView.findViewById(R.id.rv_view_item_weight);
+//            itemExpdate = itemView.findViewById(R.id.rv_view_item_expdate);
         }
     }
 

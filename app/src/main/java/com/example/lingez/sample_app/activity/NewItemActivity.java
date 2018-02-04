@@ -41,14 +41,13 @@ public class NewItemActivity extends AppCompatActivity {
     AutoCompleteTextView item_category, item_name;
     Spinner item_triglvl;
     CheckBox item_importance;
-    ArrayAdapter<CharSequence> adapter;
     ArrayAdapter<String> autocompleteAdapter;
 
     String item = "http://192.168.0.182:3000/items";
     String itemcategory = "http://192.168.0.182:3000/itemcategories";
 
     MqttAndroidClient client;
-    String topic = "SBSGTS";
+    String topic;
     String mqttServer = "tcp://iot.eclipse.org:1883";
 
     private Button new_save, new_cancel;
@@ -60,6 +59,8 @@ public class NewItemActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         final String itemID = intent.getStringExtra("ItemID");
+        Log.d("ItemID", "onCreate in newitemactivity: " + itemID);
+        topic = intent.getStringExtra("topic");
 
         item_category = findViewById(R.id.new_item_category_field);
         item_name = findViewById(R.id.new_item_name_field);
@@ -67,16 +68,17 @@ public class NewItemActivity extends AppCompatActivity {
         item_expdate = findViewById(R.id.new_item_expdate_field);
         item_unitprice = findViewById(R.id.new_item_unitprice_field);
         item_quantity = findViewById(R.id.new_item_quantity_field);
-
         item_triglvl = findViewById(R.id.newtrigspinner);
-        adapter = ArrayAdapter.createFromResource(this,R.array.triggerpercentage,android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        item_triglvl.setAdapter(adapter);
-
         item_importance = findViewById(R.id.new_item_importance_checkBox);
 
 
         new_save = findViewById(R.id.new_item_save);
+        new_save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                newItemSave();
+            }
+        });
 
         if (itemID != null){
             getItemData(itemID);
@@ -109,9 +111,7 @@ public class NewItemActivity extends AppCompatActivity {
 
 
         String clientId = MqttClient.generateClientId();
-        client =
-                new MqttAndroidClient(this.getApplicationContext(), mqttServer,
-                        clientId);
+        client = new MqttAndroidClient(this.getApplicationContext(), mqttServer, clientId);
 
         try {
             IMqttToken token = client.connect();
@@ -167,8 +167,14 @@ public class NewItemActivity extends AppCompatActivity {
         String name = item_name.getText().toString();
         String unitprice = item_unitprice.getText().toString();
         String quantity = item_quantity.getText().toString();
-        String weight = item_weight.getText().toString();
+        double weight = Double.parseDouble(item_weight.getText().toString());
         String expdate = item_expdate.getText().toString();
+
+        String[] trigperc = item_triglvl.getSelectedItem().toString().split("%");
+        double trigpercint = Integer.parseInt(trigperc[0]);
+        double triggerlvl = trigpercint/100*weight;
+
+        boolean chckbox = item_importance.isChecked();
 
         try {
             json.put("item_category", category);
@@ -177,6 +183,8 @@ public class NewItemActivity extends AppCompatActivity {
             json.put("item_quantity", quantity);
             json.put("item_weight", weight);
             json.put("item_exp_date",expdate);
+            json.put("item_trig_lvl", triggerlvl);
+            json.put("item_imp", chckbox);
         } catch (JSONException e){
             e.printStackTrace();
         }
@@ -223,6 +231,8 @@ public class NewItemActivity extends AppCompatActivity {
                             item_quantity.setText(jsonObject.getString("item_quantity"));
                             item_weight.setText(jsonObject.getString("item_weight"));
                             item_expdate.setText(jsonObject.getString("item_exp_date"));
+
+                            item_importance.setChecked(jsonObject.getBoolean("item_imp"));
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -249,8 +259,16 @@ public class NewItemActivity extends AppCompatActivity {
         String name = item_name.getText().toString();
         String unitprice = item_unitprice.getText().toString();
         String quantity = item_quantity.getText().toString();
-        String weight = item_weight.getText().toString();
+        String weightStr = item_weight.getText().toString();
+        double weight = Double.parseDouble(weightStr);
+
         String expdate = item_expdate.getText().toString();
+
+        String[] trigperc = item_triglvl.getSelectedItem().toString().split("%");
+        double trigpercint = Integer.parseInt(trigperc[0]);
+        double triggerlvl = trigpercint/100*weight;
+
+        boolean chckbox = item_importance.isChecked();
 
         try {
             json.put("item_category", category);
@@ -259,6 +277,8 @@ public class NewItemActivity extends AppCompatActivity {
             json.put("item_quantity", quantity);
             json.put("item_weight", weight);
             json.put("item_exp_date",expdate);
+            json.put("item_trig_lvl", triggerlvl);
+            json.put("item_imp", chckbox);
         } catch (JSONException e){
             e.printStackTrace();
         }

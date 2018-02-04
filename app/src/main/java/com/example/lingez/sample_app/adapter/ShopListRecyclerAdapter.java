@@ -47,15 +47,19 @@ public class ShopListRecyclerAdapter extends RecyclerView.Adapter<ShopListRecycl
         holder.checkitem.setOnCheckedChangeListener(null);
         holder.checkitem.setChecked(arrayList.get(position).getItemCheck());
         holder.checkitem.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (holder.checkitem.isChecked()){
-                    Log.d("Check", "onCheckedChanged: " + holder.getAdapterPosition() + " " + holder.checkitem.isChecked() + " " + holder.itemName.getText());
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    try{
+                            if (holder.checkitem.isChecked()){
+                            Log.d("Check", "onCheckedChanged: " + holder.getAdapterPosition() + " " + holder.checkitem.isChecked() + " " + holder.itemName.getText());
+                        }
+                        else {
+                            Log.d("Check", "onCheckedChanged: " + holder.getAdapterPosition() + " " + holder.checkitem.isChecked() + " " + holder.itemName.getText());
+                        }
+                    } catch(Exception e){
+                        e.printStackTrace();
+                    }
                 }
-                else {
-                    Log.d("Check", "onCheckedChanged: " + holder.getAdapterPosition() + " " + holder.checkitem.isChecked() + " " + holder.itemName.getText());
-                }
-            }
         });
     }
 

@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -20,6 +21,7 @@ import com.example.lingez.sample_app.Data.ShopListParent;
 import com.example.lingez.sample_app.R;
 import com.example.lingez.sample_app.RequestQueueSingleton;
 import com.example.lingez.sample_app.activity.BudgetShopListActivity;
+import com.example.lingez.sample_app.activity.ItemShopListActivity;
 import com.example.lingez.sample_app.adapter.ShopListHomeRecyclerAdapter;
 import com.example.lingez.sample_app.adapter.ViewItemRecyclerAdapter;
 
@@ -38,6 +40,7 @@ public class ShopListFragment extends Fragment{
 
     private Button newlist;
 
+    TextView systemList;
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
@@ -52,6 +55,17 @@ public class ShopListFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.shoplist_layout, container, false);
+
+        systemList = myView.findViewById(R.id.systemlist);
+        systemList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ItemShopListActivity.class);
+                String systemListID = "{\"$oid\":\"5a755f79f4aed714017194ec\"}";
+                intent.putExtra("parentID", systemListID);
+                startActivity(intent);
+            }
+        });
 
         newlist = myView.findViewById(R.id.shoplist_new);
         newlist.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +94,7 @@ public class ShopListFragment extends Fragment{
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, shopListParentURL, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                for (int i = 0; i < response.length(); i++) {
+                for (int i = 1; i < response.length(); i++) {
 
                     ShopListParent shopListParent = new ShopListParent();
 
