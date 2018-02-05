@@ -23,7 +23,6 @@ import com.example.lingez.sample_app.Data.Item;
 import com.example.lingez.sample_app.R;
 import com.example.lingez.sample_app.RequestQueueSingleton;
 import com.example.lingez.sample_app.activity.NewItemActivity;
-import com.example.lingez.sample_app.adapter.ViewItemRecyclerAdapter;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -233,7 +232,6 @@ public class ItemFragment extends Fragment{
                             item_expdate2.setText(jsonObject.getString("item_exp_date"));
                         }
                         item.setIt_id(jsonObject.getString("_id"));
-                        Log.d("JSONArray", "onResponse: "+jsonObject.getString("_id"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

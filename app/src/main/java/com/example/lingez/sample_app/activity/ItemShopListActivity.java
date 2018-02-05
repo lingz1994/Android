@@ -135,6 +135,7 @@ public class ItemShopListActivity extends AppCompatActivity {
                             shopList.setItemCategory(jsonObject.getString("sl_category"));
                             shopList.setItemQuantity(jsonObject.getString("sl_quantity"));
                             shopList.setItemTotalPrice(jsonObject.getString("sl_ttlprice"));
+                            shopList.setItemID(jsonObject.getString("_id"));
                         }
                     } catch (JSONException e){
                         e.printStackTrace();

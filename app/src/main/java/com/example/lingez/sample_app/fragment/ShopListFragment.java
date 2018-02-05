@@ -23,7 +23,6 @@ import com.example.lingez.sample_app.RequestQueueSingleton;
 import com.example.lingez.sample_app.activity.BudgetShopListActivity;
 import com.example.lingez.sample_app.activity.ItemShopListActivity;
 import com.example.lingez.sample_app.adapter.ShopListHomeRecyclerAdapter;
-import com.example.lingez.sample_app.adapter.ViewItemRecyclerAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;

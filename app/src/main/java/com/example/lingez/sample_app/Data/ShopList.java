@@ -10,6 +10,7 @@ public class ShopList {
     private String itemCategory;
     private String itemQuantity;
     private String itemTotalPrice;
+    private String itemID;
 
     public ShopList(Boolean itemCheck, String itemName, String itemCategory, String itemQuantity, String itemTotalPrice) {
         this.itemCheck = itemCheck;
@@ -20,6 +21,14 @@ public class ShopList {
     }
 
     public ShopList() {
+    }
+
+    public String getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(String itemID) {
+        this.itemID = itemID;
     }
 
     public String getItemName() {
