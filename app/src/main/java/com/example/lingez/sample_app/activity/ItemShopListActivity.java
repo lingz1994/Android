@@ -39,7 +39,7 @@ public class ItemShopListActivity extends AppCompatActivity {
     private String shopListURL = "http://192.168.0.182:3000/shop_list_parents";
 
     TextView listname, date;
-    EditText budget, itemname, itemcategory, itemquantity, itemunitprice;
+    EditText budget, itemname, itemcategory, itemquantity, itemunitprice, totalsum;
     CheckBox checklist;
 
     List<ShopList> shopLists;
@@ -67,6 +67,7 @@ public class ItemShopListActivity extends AppCompatActivity {
         itemcategory = findViewById(R.id.isl_itemcategory_field);
         itemquantity = findViewById(R.id.isl_quantity_field);
         itemunitprice = findViewById(R.id.isl_unitprice_field);
+        totalsum = findViewById(R.id.isl_total_field);
         checklist = findViewById(R.id.checkBoxItem);
 
         fetchParentData(parentID);
@@ -126,6 +127,7 @@ public class ItemShopListActivity extends AppCompatActivity {
                 for (int i = 0; i < response.length(); i++){
 
                     ShopList shopList = new ShopList();
+                    double ttl = 0;
 
                     try{
                         JSONObject jsonObject = response.getJSONObject(i);
@@ -136,12 +138,15 @@ public class ItemShopListActivity extends AppCompatActivity {
                             shopList.setItemQuantity(jsonObject.getString("sl_quantity"));
                             shopList.setItemTotalPrice(jsonObject.getString("sl_ttlprice"));
                             shopList.setItemID(jsonObject.getString("_id"));
+
+                            ttl = Double.parseDouble(jsonObject.getString("sl_ttlprice")) + ttl;
                         }
                     } catch (JSONException e){
                         e.printStackTrace();
                     }
 
                     shopLists.add(shopList);
+                    totalsum.setText(Double.toString(ttl));
                 }
                 adapter = new ShopListRecyclerAdapter(getApplicationContext(), shopLists);
                 adapter.notifyDataSetChanged();

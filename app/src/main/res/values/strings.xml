@@ -29,4 +29,7 @@
     <string name="delete">DELETE</string>
     <string name="new_list">New List</string>
 
+    <string name="dismiss">DISMISS</string>
+    <string name="reset">RESET</string>
+
 </resources>
