@@ -36,7 +36,7 @@ public class ItemShopListActivity extends AppCompatActivity {
     RecyclerView.Adapter adapter;
     RecyclerView.LayoutManager layoutManager;
 
-    private String shopListURL = "http://192.168.0.182:3000/shop_list_parents";
+    private String shopListURL = "http://192.168.1.118:3000/shop_list_parents";
 
     TextView listname, date;
     EditText budget, itemname, itemcategory, itemquantity, itemunitprice, totalsum;

@@ -33,7 +33,7 @@ public class BudgetShopListActivity extends AppCompatActivity {
     private Button create;
     private Button cancel;
     private EditText listname,datepick,budget;
-    private String shopListParentURL = "http://192.168.0.182:3000/shop_list_parents";
+    private String shopListParentURL = "http://192.168.1.118:3000/shop_list_parents";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

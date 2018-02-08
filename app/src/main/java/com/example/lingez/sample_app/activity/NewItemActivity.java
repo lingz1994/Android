@@ -43,8 +43,8 @@ public class NewItemActivity extends AppCompatActivity {
     CheckBox item_importance;
     ArrayAdapter<String> autocompleteAdapter;
 
-    String item = "http://192.168.0.182:3000/items";
-    String itemcategory = "http://192.168.0.182:3000/itemcategories";
+    String item = "http://192.168.1.118:3000/items";
+    String itemcategory = "http://192.168.1.118:3000/itemcategories";
 
     MqttAndroidClient client;
     String topic;

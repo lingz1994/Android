@@ -47,9 +47,8 @@ public class ItemFragment extends Fragment{
     CardView cv1, cv2;
     TextView item_name1, item_weight1, item_expdate1;
     TextView item_name2, item_weight2, item_expdate2;
-    Button btn;
 
-    String url = "http://192.168.0.182:3000/items";
+    String url = "http://192.168.1.118:3000/items";
 
     MqttAndroidClient client;
     String topic = "SBSGTS";
@@ -62,14 +61,6 @@ public class ItemFragment extends Fragment{
         View myView = inflater.inflate(R.layout.items_layout, container, false);
 
         itemList = new ArrayList<>();
-
-        btn = myView.findViewById(R.id.button);
-        /*btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                notifyWeight(getActivity());
-            }
-        });*/
 
         cv1 = myView.findViewById(R.id.card1);
         item_name1 = myView.findViewById(R.id.rv_view_item_name1);

@@ -34,7 +34,7 @@ import java.util.List;
 public class ShopListRecyclerAdapter extends RecyclerView.Adapter<ShopListRecyclerAdapter.MyViewHolder> {
     private Context context;
     private List<ShopList> arrayList = new ArrayList<>();
-    private String statisticsURL = "http://192.168.0.182:3000/shopliststatistics/";
+    private String statisticsURL = "http://192.168.1.118:3000/shopliststatistics/";
 
     public ShopListRecyclerAdapter(Context context, List arrayList){
         this.context = context;

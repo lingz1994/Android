@@ -35,7 +35,7 @@ import java.util.List;
 
 public class StatisticsFragment extends Fragment{
 
-    String statisticsURL = "http://192.168.0.182:3000/shopliststatistics";
+    String statisticsURL = "http://192.168.1.118:3000/shopliststatistics";
 
     List<Statistic> statisticList;
 
